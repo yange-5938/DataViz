@@ -26,13 +26,243 @@ sum <- n*(n+1)/2
 sum
 ```
 
+3. b
+```{r}
+n <- 1000
+x <- seq(1,n)
+sum(x)
+```
+
+
+4. 
+```{r}
+?log
+log(sqrt(100), base = 10)
+```
+
+5. c
+```{r}
+?exp
+```
+
+6.
+```{r}
+n <- c(1:100)
+m <- 1/n^2
+sum <- sum(m)
+sum
+euler <- pi^2 / 6
+euler
+```
+
+## Section 02
+
+1.
+```{r}
+data(murders)
+str(murders)
+```
+
+2. 
+
+```{r}
+names(murders)
+```
+
 3.
 
+```{r}
+a <- murders$abb
+class(a)
+```
+
+4.
+```{r}
+murders$region
+class(murders$region)
+?levels
+?length
+length(levels(murders$region))
+
+```
+
+5.
+```{r}
+table(murders$region)
+```
 
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+## Section 3
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+1.
+```{r}
+temp <- c(35,88,42,84,81,30)
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+2.
+```{r}
+city <- c('Beijing','Lagos','Paris','Rio de Janeiro','San Juan','Toronto')
+```
+
+3.
+```{r}
+?names
+names(temp) <- city
+temp
+```
+
+4.
+```{r}
+temp[1:3]
+```
+
+5.
+```{r}
+temp[c('Paris','San Juan')]
+```
+
+6.
+```{r}
+12:73
+```
+
+7.
+```{r}
+?seq
+c <- seq(1,100,2)
+c
+```
+
+8.
+```{r}
+v <- seq(6,55,4/7)
+length(v)
+```
+
+9.
+```{r}
+a <- seq(1,10,0.5)
+class(a)
+```
+
+10.
+```{r}
+a <- seq(1,10)
+class(a)
+```
+
+11.
+```{r}
+class(1L)
+```
+
+12.
+```{r}
+x<-c("1","3","5")
+class(x)
+x_int <- as.integer(x)
+class(x_int)
+```
+
+## Section 04
+
+1.
+```{r}
+pop <- murders$population
+pop <-sort(pop)
+pop[1]
+
+min(murders$population)
+```
+
+
+2.
+```{r}
+?order
+pop <- murders$population
+order(pop)
+pop[order(pop)[1]]
+```
+
+3.
+```{r}
+?which.min
+which.min(murders$population)
+```
+
+4.
+```{r}
+ind = which.min(murders$population)
+murders[51,'state']
+```
+
+
+5.
+```{r}
+temp <- c(35,88,42,84,81,30)
+city <- c('Beijing','Lagos','Paris','Rio de Janeiro','San Juan','Toronto')
+city_temps <- data.frame(name = city, temperature = temp)
+
+ranks <- rank(city_temps$temperature)
+city_temps
+
+my_df <- data.frame(name = city_temps$name, rank = ranks)
+my_df
+```
+
+## Section 5
+
+1.
+```{r}
+temp <- c(35,88,42,84,81,30)
+city <- c('Beijing','Lagos','Paris','Rio de Janeiro','San Juan','Toronto')
+names(temp) <- city
+
+temp_F <- (temp -32) * 5/9
+temp_F
+```
+
+2.
+```{r}
+data("na_example")
+str(na_example)
+
+mean(na_example)
+?is.na
+
+ind <- is.na(na_example)
+table(ind)
+
+```
+
+3.
+```{r}
+?mean
+mean(na_example[!ind])
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
