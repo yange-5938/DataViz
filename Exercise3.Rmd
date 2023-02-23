@@ -5,10 +5,12 @@ output: html_notebook
 
 ## Section 00
 
+```{r}
 library(data.table)
 library(magrittr)
 library(tidyr)
 
+```
 
 ## Section 01
 
@@ -56,10 +58,39 @@ wide_dt <- dcast(long_dt, ... ~ product, value.var = "quantity")
 wide_dt
 ```
 
+## Section 2
 
+```{r}
+mtcars_dt <- as.data.table(mtcars)
+mtcars_dt[, carname := rownames(mtcars)]
 
+dt1 <- mtcars_dt[5:25,.(carname, mpg, cyl)]
+dt2<- mtcars_dt[1:10, .(carname, gear)]
+```
 
+1.
+```{r}
+?merge
+str(dt1)
+str(dt2)
 
+inner_mg <- merge(dt1,dt2,by = "carname")
+str(inner_mg)
+```
+
+2.
+```{r}
+left_mg<- merge(dt1, dt2, by = "carname", all.x = TRUE)
+str(left_mg)
+left_mg
+```
+
+3.
+```{r}
+
+outer_mg<- merge(dt1, dt2, by = "carname", all= T)
+outer_mg[, .N]
+```
 
 
 
