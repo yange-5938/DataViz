@@ -1,0 +1,15 @@
+---
+title: "Exercise 3"
+output: html_notebook
+---
+
+## Section 00
+
+library(data.table)
+library(magrittr)
+library(tidyr)
+
+
+## Section 01
+
+1.

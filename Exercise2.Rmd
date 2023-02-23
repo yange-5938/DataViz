@@ -196,11 +196,48 @@ str(a)
 ```
 
 
+## Section 4
+
+1.
+```{r}
+install.packages("readxl")
+library(readxl)
+
+data <- read_excel("extdata/summer_olympic_medals.xlsx")
+str(data)
+data <- as.data.table(data)
+
+str(data)
+data
+data[Medal == "Bronze",.N,by=Athlete][N == max(N)]
+
+```
 
 
+2.
+```{r}
+str(data)
+data[,unique(Gender)]
+data[,unique(Event_gender)]
 
+table(data$Gender)
 
+data[Gender =="Men" & (Event_gender != "M" & Event_gender != "X")]
 
+```
+
+3.
+```{r}
+?read_excel
+str(data)
+data[,.N,by = NOC][N==max(N)][,NOC]
+```
+
+4.
+```{r}
+?make.names
+?setdiff
+```
 
 
 
