@@ -25,28 +25,106 @@ ratings_dt <- fread(file.path("extdata/BX-Book-Ratings.csv"))
 class(users_dt)
 class(books_dt)
 class(ratings_dt)
+```
 
+3.
+```{r}
 colnames(users_dt)
 ?sapply
-
+?`:=`
 users_dt
 str(users_dt)
 sapply(users_dt, class)
 users_dt[,Age := as.numeric(Age)]
 users_dt
 ```
+4.
+```{r}
+summary(books_dt)
+```
+
+5.
+```{r}
+?first
+?head
+first(ratings_dt,5)
+last(ratings_dt,5)
+```
+
+6.
+```{r}
+?gsub
+colnames(users_dt) <- gsub("-","_", colnames(users_dt))
+colnames(books_dt) <- gsub("-","_", colnames(books_dt))
+colnames(ratings_dt) <- gsub("-","_", colnames(ratings_dt))
+
+```
 
 
+7.
+```{r}
+str(books_dt)
+books_dt <- books_dt[,c("ISBN","Book_Title","Book_Author","Year_Of_Publication","Publisher")]
+```
 
+8.
+```{r}
+books_dt_2 <- books_dt[1900<=Year_Of_Publication & Year_Of_Publication>= 2019,]
+str(books_dt_2)
+```
 
+## Section 2
 
+1.
+```{r}
+??unqiue
+books_dt[,length(unique(Book_Author))]
+```
 
+2.
+```{r}
+str(books_dt)
+books_dt[Year_Of_Publication >= 2000 & Year_Of_Publication <= 2010, uniqueN(Book_Author), by = Year_Of_Publication]
+```
+3.
+```{r}
+?is.na
+users_dt[,sum(is.na(Age))]
+users_dt[is.na(Age),.N]
+```
 
+4.
+```{r}
+str(ratings_dt)
+ratings_dt[,max(Book_Rating)]
+```
 
+5.
+```{r}
+?.N
+?median
+ratings_dt[Book_Rating>0,.N, by = Book_Rating][N == max(N)]
+```
 
+6.
+```{r}
+str(ratings_dt)
+ratings_dt[Book_Rating == max(Book_Rating),.N, by = ISBN][N==max(N)]
+```
 
+7.
+```{r}
+?order
+order(-ratings_dt$Book_Rating)
+ratings_dt <- ratings_dt[order(-Book_Rating)]
+```
 
+## Section 3
 
+1.
+```{r}
+
+```
 
 
 
