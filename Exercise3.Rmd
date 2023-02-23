@@ -93,9 +93,31 @@ outer_mg[, .N]
 ```
 
 
+## Section 3
+
+1.
+```{r}
+messy_dt <- fread("extdata/weather.txt")
+str(messy_dt)
+messy_dt
+```
+
+2.
+
+3.
+
+4.
+```{r}
+## wide -> long
+?melt
+messy_dt
+tidy_dt <- melt(messy_dt,id.vars = c("id", "year", "month", "element"), variable.name = "day", value.name = "temp")
+tidy_dt[, day:= as.integer(gsub("d","",day))]
+tidy_dt
+```
 
 
-
+## Section 4
 
 
 
