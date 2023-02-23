@@ -123,13 +123,77 @@ ratings_dt <- ratings_dt[order(-Book_Rating)]
 
 1.
 ```{r}
+?ifelse
+ratings_dt[,High_Rating := ifelse(Book_Rating>=7,1,0)]
+```
+
+2.
+```{r}
+sum(ratings_dt$High_Rating)
+ratings_dt[High_Rating==1,.N]/ratings_dt[,.N]
+ratings_dt[,sum(High_Rating)/.N]
 
 ```
 
+3.
+```{r}
+?`%in%`
+str(users_dt)
+str(ratings_dt)
+ratings_dt[,User_ID]
+users_dt[!(User_ID %in% ratings_dt$User_ID)]
+```
 
+4.
+```{r}
+?remove
+str(users_dt)
+users_dt[User_ID %in% ratings_dt$User_ID & !is.na(Age), .N, by=Age][N== max(N)]
+```
 
+5.
+```{r}
+str(users_dt)
+str(ratings_dt)
+ratings_dt[,.N, by = User_ID][,mean(N)]
+```
 
+6.
+```{r}
+?order
+str(ratings_dt)
+ratings_dt[order(-ratings_dt$Book_Rating, Year_Of_Publication),.(Book_Title, Year_Of_Publication, Book_Rating)] %>% head(1)
+```
 
+7.
+```{r}
+str(ratings_dt)
+ratings_dt[,Rating_Count := .N, by = ISBN]
+ratings_dt[Rating_Count == max(Rating_Count), max(Year_Of_Publication)]
+```
+
+8.
+```{r}
+str(ratings_dt)
+ratings_dt[,Max_Book_Ranking := max(Book_Rating),by = ISBN]
+ratings_dt
+```
+
+9.
+```{r}
+str(ratings_dt)
+ratings_dt_test <- ratings_dt[Book_Author %in% c("Agatha Christie","William Shakespeare")]
+```
+
+10.
+```{r}
+str(ratings_dt_test)
+??`.()`
+a <- ratings_dt_test[,c(mean(Book_Rating), max(Book_Rating)), by = Book_Author]
+a
+class(a)
+str(a)
+```
 
 
 
