@@ -131,6 +131,44 @@ tidy_dt
 
 ## Section 4
 
+1.
+```{r}
+?list.files
+
+files <- list.files("extdata/baby-names", full.names =T)
+files
+str(files)
+fread(files[23])
+```
+
+2.
+```{r}
+?basename
+names(files) <- basename(files)
+str(files)
+```
+
+3.
+```{r}
+?rbindlist
+?lapply
+tables <- lapply(files, fread)
+tables
+dt <- rbindlist(tables, idcol = 'filename')
+dt
+str(dt)
+```
+
+
+4.
+```{r}
+?separate
+
+dt <- separate(dt, col= "filename", into = c("year", "sex"))
+dt
+
+```
+
 
 
 
