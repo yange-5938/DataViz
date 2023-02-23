@@ -170,7 +170,41 @@ dt
 ```
 
 
+## Section 5
 
+1.
+```{r}
+gt <- fread("extdata/eqtl/genotype.txt")
+dim(gt)
+
+head(gt[,1:5])
+
+growth <- fread("extdata/eqtl/growth.txt")
+dim(growth)
+head(growth)
+
+```
+
+2.
+```{r}
+summary(gt)
+summary(growth)
+
+str(gt)
+?melt
+gt_melt <- melt(gt, id.vars = "strain", variable.name = "media", value.name = "growth_rate")
+gt_melt
+growth_melt <- melt(growth, id.vars = "strain", variable.name = "media", value.name = "growth_rate")
+growth_melt
+
+?merge
+dt <- merge(growth_melt, gt_melt, by = "strain", allow.cartesian = T)
+dt
+
+dt[,gt_melt := as.factor(gt)]
+dt
+
+```
 
 
 
