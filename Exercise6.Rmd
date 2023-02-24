@@ -45,10 +45,39 @@ ggplot(coffee_dt, aes(coffee_cups_per_day, datavizitis_risk, fill = packs_cigare
 ## Section 4
 
 1.
+
+
+2.
 ```{r}
+# simulate data
+dt <- data.table(pro_uptake = c(rnorm(3, 10100, 300), rnorm(4, 12100, 300), rnorm(3, 9850, 300), rnorm(4, 11100, 300),
+rnorm(4,8300, 300), rnorm(3,10050, 300), rnorm(3, 12000, 300), rnorm(3, 10020, 300), rnorm(3, 10080, 300), rnorm(3, 10070, 300) ),
+mutants = c(rep("WT",3), rep("T49A",4), rep("K227N",3), rep("A400V",4), rep("L421P",4), rep("I500T",3), rep("N591D",3), rep("A601T",3), rep("E684D",3), rep("G710R",3) ) )
+
+dt
+
+
+# sort by median
+dt[, median_per_mut := median(pro_uptake), by = mutants]
+dt
+wt_med = unique(dt[mutants == "WT", median_per_mut])
+wt_med
+dt[, mutants:= factor(mutants, levels=unique(dt[order(median_per_mut), mutants]))]
+# assign color by relation to WT
+dt[, rel_to_wt := ifelse(median_per_mut < wt_med, "Smaller than WT", "Larger than WT"), by = mutants]
+dt[mutants == "WT", rel_to_wt := "WT"]
+p <- ggplot(dt, aes(mutants, pro_uptake, fill = rel_to_wt)) + geom_boxplot() +
+geom_jitter(width = 0.4) +
+labs(y = "Proline Uptake") +
+theme(axis.text.x = element_text(size=6))
+# ggplotly(p)
+p
 
 ```
 
+## Section 5
+
+1.
 
 
 
