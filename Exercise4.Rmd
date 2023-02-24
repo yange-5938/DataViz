@@ -3,3 +3,40 @@ title: "Exercise 4"
 output: html_notebook
 ---
 
+
+## Section 0
+
+1.
+```{r}
+## install.packages("ggrepel")
+
+library(ggplot2)
+library(data.table)
+library(magrittr)
+library(tidyr)
+library(ggrepel)
+```
+
+## Section 1
+
+1.
+
+## Section 2
+
+1.
+```{r}
+?ggplot
+
+data(mpg)
+str(mpg)
+mpg <- as.data.table(mpg)
+str(mpg)
+unique(mpg$year)
+
+?geom_point
+?geom_smooth
+
+ggplot(mpg, aes(cty, hwy, color = factor(year))) + geom_point() + geom_smooth(method = 'lm')
+```
+
+
