@@ -117,10 +117,56 @@ pheatmap(plot.data,annotation_row = row.ann, show_rownames = F, scale = "column"
 
 ## Section 4
 
+1.
+```{r}
+dt <- data.table(x=c(8,10,4,5,6,6,3), y = c(5,7,6,8,4,9,3), letter = c("A","B","C","D","E","X1","X2"))
+dt
+
+dt[,delta.x1:= x - dt[letter =="X1",x]]
+dt[,delta.x2:= x - dt[letter =="X2",x]]
+dt[,delta.y1:= y - dt[letter =="X1",y]]
+dt[,delta.y2:= y - dt[letter =="X2",y]]
+dt
+
+dt[, distance.x1 := sqrt(delta.x1 **2 + delta.y1**2)]
+dt[, distance.x2 := sqrt(delta.x2 **2 + delta.y2**2)]
+dt
+
+dt[,cluster := ifelse(distance.x1 <distance.x2, "X1", "X2")]
+dt
+
+new.centroids <- dt[1:5, .(mean.x = mean(x),mean.y = mean(y)), by = "cluster"]
 
 
+new.centroids
+```
+
+2.
+```{r}
+?scale
+iris
+plot.data
+
+scaled.data <- scale(plot.data)
+scaled.data
+
+?kmeans
+km<- kmeans(scaled.data, 3)
+km
+```
 
 
+3.
+```{r}
+table(complete, km$cluster)
+```
+
+## Section 5
+
+1.
+```{r}
+
+```
 
 
 
