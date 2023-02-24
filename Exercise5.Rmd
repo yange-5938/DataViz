@@ -65,9 +65,51 @@ ggcorr(expr[,-"tumor_type"])
 ```
 
 
+## Section 2
+
+1.
+```{r}
+iris
+str(iris)
+
+?as.matrix
+plot.data <- iris[,-5] %>% as.matrix 
+pheatmap(plot.data, cluster_rows = F, cluster_cols = F, scale = "column")
 
 
+```
 
+2.
+```{r}
+?pheatmap
+
+
+pheatmap(plot.data, show_rownames = F, scale = "column", clustering_method = "complete")
+
+
+```
+
+3.
+```{r}
+h_complete <- pheatmap(plot.data, show_rowsnames =F, scale ="column", clustering_method = "complete", silent=T)
+
+?cutree
+complete <- cutree(h_complete$tree_row, k =3) 
+
+complete
+```
+
+4.
+```{r}
+rownames(plot.data) <- 1:nrow(plot.data)
+plot.data
+
+row.ann <- data.table(Species = iris$Species)
+row.ann[,complete:= factor(complete)]
+
+pheatmap(plot.data,annotation_row = row.ann, show_rownames = F, scale = "column", clustering_method = "complete")
+
+```
 
 
 
