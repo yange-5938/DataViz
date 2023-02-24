@@ -131,9 +131,34 @@ p + geom_point() + facet_wrap(~Species, scales = "free")
 
 ```
 
+## Section 5
 
+1.
+```{r}
+medals_dt <- fread("extdata/medals.csv")
+str(medals_dt)
 
+p<- ggplot(medals_dt, aes(total,population, color = country))
+p + geom_point()
+```
 
+2.
+```{r}
+p<- ggplot(medals_dt, aes(total,population))
+p+ geom_point()+ scale_x_log10()+ scale_y_log10()
+```
+
+3.
+```{r}
+?geom_text
+p<- ggplot(medals_dt, aes(total,population))
+p+ geom_point()+ scale_x_log10()+ scale_y_log10() + geom_text(aes(label = code))
+
+library(ggrepel)
+
+?geom_text_repel
+p+ geom_point()+ scale_x_log10()+ scale_y_log10() + geom_text_repel(aes(label=code))
+```
 
 
 
