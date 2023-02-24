@@ -89,11 +89,31 @@ ggplot(fatality_dt, aes(age_group, fatality_rate, fill=sex)) +geom_col(position 
 
 ## Section 6
 
+1.
+```{r}
+datavizitis_smoking_dt <- fread("extdata/datavizitis_smoking.csv")
+datavizitis_smoking_dt
+
+?geom_smooth
+ggplot(datavizitis_smoking_dt[hospitalized=="Yes"], aes(cigarettes_per_day, datavizitis_severity)) + geom_point() + geom_smooth(method = "lm")
+
+```
+
+2.
+```{r}
+ggplot(datavizitis_smoking_dt, aes(cigarettes_per_day, datavizitis_severity)) + geom_point() + geom_smooth(method = "lm")
+
+```
+
+3.
+```{r}
+ggplot(datavizitis_smoking_dt, aes(cigarettes_per_day, datavizitis_severity, color=hospitalized)) + geom_point() + geom_smooth(method = "lm")
+```
 
 
+4.
 
-
-
+## Section 7
 
 
 
