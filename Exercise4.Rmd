@@ -40,3 +40,108 @@ ggplot(mpg, aes(cty, hwy, color = factor(year))) + geom_point() + geom_smooth(me
 ```
 
 
+
+
+## Section 3
+
+1.
+```{r}
+data(iris)
+iris_dt <- as.data.table(iris)
+iris_dt
+str(iris_dt)
+```
+
+2.
+```{r}
+?melt
+iris_dt
+
+iris_melt <- melt(iris_dt,id.vars = "Species")
+iris_melt
+
+?ggplot
+?facet_wrap
+ggplot(iris_melt, aes(value, color = Species)) + geom_histogram() + facet_wrap(iris_melt$variable)
+```
+
+3.
+```{r}
+?geom_histogram
+?`~`
+iris_melt
+
+iris_melt %>% ggplot(aes(value, color = Species)) + geom_histogram(bins = 115)+facet_wrap(~variable)
+
+```
+
+
+4.
+```{r}
+ggplot(iris_melt, aes(variable, value))+ geom_boxplot()
+
+```
+
+5.
+```{r}
+?geom_jitter
+?geom_boxplot
+
+p <- ggplot(iris_melt,aes(variable, value))+geom_boxplot(outlier.shape = NA)
+
+
+p + geom_jitter(width = 0.3, size = .5)
+
+?geom_dotplot
+p + geom_dotplot(binaxis = "y", stackdir="center", dotsize = .3)
+```
+
+6.
+```{r}
+?geom_violin
+p <- ggplot(iris_melt,aes(variable, value))
+p + geom_violin() + geom_boxplot(width=.03)
+```
+
+7.
+```{r}
+?geom_dotplot
+p <- ggplot(iris_melt,aes(variable, value, color = Species))
+p+ geom_dotplot(binaxis = "y", stackdir = "centerwhole", dotsize = .3)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
