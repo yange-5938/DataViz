@@ -125,8 +125,32 @@ p_val
 
 ## Section 3
 
+1.
+```{r}
+
+growth
+conditioning_dt
+# Add growth in maltose (YPMalt) to the genotype data
+conditioning_dt <- merge(mks_geno, growth[media == "YPMalt"], by = "strain")
+a <- ggplot(conditioning_dt, aes(mrk_5211, growth_rate)) +
+    geom_boxplot() +
+    facet_wrap(~ mrk_5091) +
+    labs(title="conditioned on marker 5091")
+b <- ggplot(conditioning_dt, aes(mrk_5091, growth_rate)) +
+    geom_boxplot() +
+    facet_wrap(~ mrk_5211) +
+    labs(title="conditioned on marker 5211")
+a / b #Patchwork syntax to nicely align plots
 
 
+
+
+```
+
+
+## Section 4
+
+1.
 
 
 
