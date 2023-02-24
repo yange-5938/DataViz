@@ -174,8 +174,51 @@ library(fossil)
 
 
 
+## Section 6
+
+1.
+```{r}
+data(iris)
+iris_dt <- as.data.table(iris)
+iris
 
 
+pca_data <- iris_dt[Species =="setosa", -"Species"]
+pca_data
+
+
+?prcomp
+pca <- prcomp(pca_data, center = T, scale. = T)
+pca
+```
+
+2.
+```{r}
+summary(pca)
+```
+
+3.
+```{r}
+?predict
+proj <- as.data.table(predict(pca))
+ggplot(proj, aes(PC1, PC2)) + geom_point()
+
+?biplot
+biplot(pca)
+```
+
+4.
+```{r}
+
+?cbind
+pc_iris <- cbind(iris_dt[Species =="setosa"],proj)
+pc_iris
+pc_iris<- melt(pc_iris, id.vars = c("Species", "PC1", "PC2", "PC3", "PC4"))
+pc_iris
+
+ggplot(pc_iris, aes(value, PC1)) + geom_point() + facet_wrap(~variable, scales = "free")
+
+```
 
 
 
