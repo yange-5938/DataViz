@@ -110,7 +110,26 @@ p <- ggplot(iris_melt,aes(variable, value, color = Species))
 p+ geom_dotplot(binaxis = "y", stackdir = "centerwhole", dotsize = .3)
 ```
 
+## Section 4
 
+1.
+```{r}
+
+p <- ggplot(iris_melt,aes(variable, value, color = Species))
+p + geom_point()
+```
+
+2.
+```{r}
+
+p <- ggplot(iris_melt,aes(variable, value, color = Species))
+p+ geom_point() + labs(x = "Petal Length", y = "Petal Width", title = "Relationship between petal length and width")+ theme(plot.title= element_text(hjust =.5))
+
+?facet_wrap
+p <- ggplot(iris_melt,aes(variable, value))
+p + geom_point() + facet_wrap(~Species, scales = "free")
+
+```
 
 
 
