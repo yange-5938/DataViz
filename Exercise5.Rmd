@@ -163,8 +163,10 @@ table(complete, km$cluster)
 
 ## Section 5
 
-1.
+1. mei zuo wan
 ```{r}
+#install.packages("fossil")
+library(fossil)
 
 ```
 
