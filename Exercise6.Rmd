@@ -77,9 +77,17 @@ p
 
 ## Section 5
 
-1.
+```{r}
+fatality_dt <- fread("extdata/belgium_infection_fatality_rate_june2020.csv")
+fatality_dt
 
+fatality_dt <- melt(fatality_dt, id.vars = "age_group", value.name = "fatality_rate", variable.name = "sex")
+fatality_dt
 
+ggplot(fatality_dt, aes(age_group, fatality_rate, fill=sex)) +geom_col(position = "dodge")
+```
+
+## Section 6
 
 
 
