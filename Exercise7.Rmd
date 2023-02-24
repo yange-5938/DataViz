@@ -89,7 +89,41 @@ p_val_medians(getMaltoseDt("mrk_5091"))
 
 ## Section 2
 
+```{r}
+?spread
+genotype
+mks_geno <- genotype[marker %in% c("mrk_5091", "mrk_5211")] %>%
+  spread(marker, genotype)
+mks_geno
 
+# Ho: Marker 5091 is not significantly associated with marker 5211
+# T statistic: number of times both markers had the same genotype
+# OR
+# T statistic: number of times both markers had the same genotype / number of strains 
+
+mks_geno <- genotype[marker %in% c("mrk_5091", "mrk_5211")] %>% spread(marker, genotype) %>% as.data.table
+
+mks_geno
+str(mks_geno)
+
+# Compute the number of times both markers had the same genotype
+#T_ref <- mks_geno[mrk_5091 == mrk_5211, .N] # First option
+T_ref <- mks_geno[mrk_5091 == mrk_5211, .N]/nrow(mks_geno) # Second option
+# permutation
+N_permu <- 1000
+T_star <- sapply(1:N_permu, function(x){
+mks_geno[mrk_5091 == sample(mrk_5211), .N]/nrow(mks_geno)}) # other alternative
+# plot distribution
+ggplot(data = data.table(T_star = T_star), aes(T_star)) + geom_histogram() +
+  geom_vline(aes(xintercept=T_ref, color="T_ref")) + xlim(0,1)
+
+# compute p-value
+p_val <- (sum(T_star >= T_ref) + 1) / (N_permu + 1)
+p_val
+```
+
+
+## Section 3
 
 
 
