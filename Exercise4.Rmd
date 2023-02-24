@@ -161,12 +161,57 @@ p+ geom_point()+ scale_x_log10()+ scale_y_log10() + geom_text_repel(aes(label=co
 ```
 
 
+## Section 6
+
+1.
+```{r}
+anscombe
+
+anscombe_reshaped <- anscombe %>% as.data.table() %>%.[, ID := seq(nrow(.))] %>% melt(id.var=c("ID")) %>%separate(variable,c("xy", "group"), sep=1) %>% dcast(... ~ xy) %>%.[, group := paste0("dataset_", group)]
+
+```
+
+2.
+
+3.
+
+4.
+
+5.
+```{r}
+boxplots_dt <- fread("extdata/boxplots.csv")
+melt(boxplots_dt) %>% ggplot(aes(variable, value)) + geom_boxplot()
+```
+
+6.
+```{r}
+ melt(boxplots_dt) %>% ggplot(aes(variable, value)) + geom_violin()
+```
 
 
+## Section 7
+
+1.
+```{r}
+mtcars <- data.table(mtcars)
+str(mtcars)
+ggplot(mtcars, aes(factor(cyl), mpg)) + geom_boxplot()
 
 
-
-
+## First compute median
+mtcars[, medians := median(mpg), by = cyl] ## Quantiles
+mtcars[, c("lq", "uq") := .(quantile(mpg, 0.25), quantile(mpg, 0.75)), by = cyl]
+## Whiskers
+mtcars[, IQR := 1.5 * IQR(mpg), by = cyl]
+mtcars[, c("up_IQR", "down_IQR") := .(IQR + uq, lq - IQR)]
+## Get the most extreme value within 1.5*IQR
+mtcars[mpg < up_IQR, up_whisker := max(mpg),by = "cyl"]
+mtcars[mpg > down_IQR,down_whisker := min(mpg), by = "cyl"]
+## Compute outliers
+mtcars[, outlier := (mpg < down_IQR | mpg > up_IQR), by = "cyl"]
+## Make the plot
+ggplot(mtcars, aes(cyl, medians, ymax = uq, ymin = lq)) + geom_crossbar(fill = "white", width = 1.3) +geom_segment(aes(cyl, down_whisker, xend = cyl, yend = lq)) + geom_segment(aes(cyl, uq, xend = cyl, yend = up_whisker)) + geom_point(data = mtcars[outlier == TRUE], aes(cyl, mpg)) + labs(y = "mpg")
+```
 
 
 
