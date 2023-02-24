@@ -3,3 +3,81 @@ title: "Exercise 6"
 output: html_notebook
 ---
 
+## Section 0
+
+```{r}
+library(ggplot2)
+library(data.table)
+library(magrittr)
+library(tidyr)
+```
+
+## Section 1
+
+1.
+
+## Section 2
+1.
+
+## Section 3
+
+1.
+```{r}
+coffee_dt <- fread("extdata/coffee_sim.csv")
+str(coffee_dt)
+summary(coffee_dt)
+
+ggplot(coffee_dt, aes(coffee_cups_per_day, datavizitis_risk))+geom_boxplot()
+
+```
+
+2.
+```{r}
+ggplot(coffee_dt, aes(packs_cigarettes_per_day, datavizitis_risk))+geom_boxplot()
+
+?aes
+ggplot(coffee_dt, aes(packs_cigarettes_per_day, datavizitis_risk, fill = coffee_cups_per_day))+geom_boxplot()+ guides(fill=guide_legend(title = "Cups of coffee"))
+
+ggplot(coffee_dt, aes(coffee_cups_per_day, datavizitis_risk, fill = packs_cigarettes_per_day))+geom_boxplot()+ guides(fill=guide_legend(title = "packs_cigarettes_per_day"))
+```
+
+
+## Section 4
+
+1.
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
