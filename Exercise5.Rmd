@@ -3,4 +3,108 @@ title: "Exercise 5"
 output: html_notebook
 ---
 
+## Section 0
+
+1.
+```{r}
+library(ggplot2)
+library(data.table)
+library(magrittr)
+library(tidyr)
+# install.packages("GGally")
+library(GGally)
+# install.packages("pheatmap")
+library(pheatmap)
+# install.packages("mclust")
+library(mclust)
+```
+
+## Section 1
+
+1.
+```{r}
+expr<- readRDS("extdata/cancer_data.rds") %>% as.data.table(keep.rownames = "tumor_type")
+head(expr[,1:6])
+expr
+
+?ggcorr
+ggcorr(expr[,-"tumor_type"])
+
+```
+
+2.
+```{r}
+?pheatmap
+?as.matrix
+expr[]
+expr_mat <- as.matrix(expr[,-"tumor_type"])
+expr_mat
+
+row.names(expr_mat) <- expr[,tumor_type]
+pheatmap(expr_mat, cluster_rows = F, cluster_cols =F)
+  
+
+
+```
+
+3.
+```{r}
+expr
+expr_melt <- melt(expr, id.vars="tumor_type")
+expr_melt
+expr_melt[order(-value)]
+
+
+ggplot(expr, aes(FUK, UGP2))+ geom_point()
+
+expr[tumor_type=="DOHH2", FUK :=NA]
+expr[tumor_type=="DOHH2", UGP2 :=NA]
+
+ggcorr(expr[,-"tumor_type"])
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
