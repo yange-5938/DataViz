@@ -1,0 +1,68 @@
+---
+title: "Exercise 7"
+output: html_notebook
+---
+
+## Section 0
+
+1.
+```{r}
+library(ggplot2)
+library(data.table)
+library(magrittr)
+library(tidyr)
+library(dplyr)
+# install.packages("patchwork")
+library(patchwork)
+```
+
+2.
+```{r}
+genotype <- fread("./extdata/eqtl/genotype.txt")
+genotype <- melt(genotype, id.vars = "strain", variable.name = "marker",
+                 value.name = "genotype")
+growth <- fread("./extdata/eqtl/growth.txt")
+growth <- melt(growth, id.vars = "strain", variable.name = "media",
+               value.name = "growth_rate")
+marker <- fread("./extdata/eqtl/marker.txt")
+```
+
+## Section 1
+
+1.
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
