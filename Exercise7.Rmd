@@ -150,7 +150,6 @@ a / b #Patchwork syntax to nicely align plots
 
 ## Section 4
 
-1.
 
 
 
