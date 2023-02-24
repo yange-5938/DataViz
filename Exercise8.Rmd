@@ -29,3 +29,34 @@ marker <- fread("./extdata/eqtl/marker.txt")
 
 
 ## Section 1
+
+1.
+
+## Section 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
